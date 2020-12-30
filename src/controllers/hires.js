@@ -187,7 +187,7 @@ exports.addHire = async (req, res) => {
 exports.getOffers = async (req, res) => {
   const { id } = req.userId
   try {
-    const orders = await Hire.findAll({
+    const offers = await Hire.findAll({
       where: {
         '$orderTo.id$': { [Op.eq]: id },
       },
@@ -229,10 +229,10 @@ exports.getOffers = async (req, res) => {
       ],
     })
 
-    if (orders.length === 0) {
+    if (offers.length === 0) {
       return res.status(400).send({
         status: 'Resource not found',
-        message: "Order doesn't exist",
+        message: "Offers doesn't exist",
         data: [],
       })
     }
@@ -240,7 +240,7 @@ exports.getOffers = async (req, res) => {
     res.send({
       status: 'Success',
       data: {
-        orders,
+        offers,
       },
     })
   } catch (err) {
@@ -295,6 +295,9 @@ exports.getOrders = async (req, res) => {
           through: {
             attributes: [],
           },
+        },
+        {
+          model: Project,
         },
       ],
     })

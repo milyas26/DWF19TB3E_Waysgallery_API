@@ -1,4 +1,4 @@
-const { User, Follow, Post } = require('../../models')
+const { User, Follow, Post, Image } = require('../../models')
 
 // ADD FOLLOWING
 exports.addFollowing = async (req, res) => {
@@ -138,7 +138,14 @@ exports.getFollowings = async (req, res) => {
           model: Post,
           as: 'posts',
           attributes: {
-            exclude: ['channelId', 'updatedAt', 'userId', 'UserId'],
+            exclude: ['updatedAt', 'userId', 'UserId'],
+          },
+          include: {
+            model: Image,
+            as: 'photos',
+            attributes: {
+              exclude: ['postId', 'PostId', 'ProjectId', 'updatedAt'],
+            },
           },
         },
       },

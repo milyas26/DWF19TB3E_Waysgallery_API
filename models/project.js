@@ -13,7 +13,9 @@ module.exports = (sequelize, DataTypes) => {
         as: 'photos',
       })
 
-      Project.belongsTo(models.Hire)
+      Project.belongsTo(models.Hire, {
+        as: 'hire',
+      })
     }
   }
   Project.init(

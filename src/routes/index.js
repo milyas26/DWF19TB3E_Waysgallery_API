@@ -12,7 +12,7 @@ const {
   updateProfile,
 } = require('../controllers/profiles')
 
-const { addArt, updateArt } = require('../controllers/arts')
+const { addArt, updateArt, getArt } = require('../controllers/arts')
 
 const {
   getHires,
@@ -25,6 +25,10 @@ const {
   sendProject,
   getProjects,
   getDetailProject,
+  cancelProject,
+  approveProject,
+  completeProject,
+  successProject,
 } = require('../controllers/projects')
 
 const {
@@ -52,6 +56,7 @@ router.patch('/user', authentication, uploadAvatar('avatar'), updateProfile)
 // ARTS
 router.post('/art', authentication, uploadAvatar('image'), addArt)
 router.patch('/art', authentication, uploadAvatar('image'), updateArt)
+router.get('/art/:id', getArt)
 
 // HIRES
 router.get('/hires', getHires)
@@ -68,6 +73,10 @@ router.post(
 )
 router.get('/projects', getProjects)
 router.get('/project/:id', authentication, getDetailProject)
+router.patch('/cancel-project/:id', authentication, cancelProject)
+router.patch('/approve-project/:id', authentication, approveProject)
+router.patch('/complete-project/:id', authentication, completeProject)
+router.patch('/success-project/:id', authentication, successProject)
 
 // FOLLOW
 router.post('/follow/:id', authentication, addFollowing)

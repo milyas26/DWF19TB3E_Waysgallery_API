@@ -105,3 +105,35 @@ exports.updateArt = async (req, res) => {
     })
   }
 }
+
+// GET ART
+
+exports.getArt = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const art = await Art.findOne({
+      where: {
+        id,
+      },
+      attributes: {
+        exclude: ['createdAt', 'updatedAt', 'userId', 'UserId'],
+      },
+    })
+
+    res.send({
+      status: 'Success',
+      message: 'Success get Art',
+      data: {
+        art,
+      },
+    })
+  } catch (err) {
+    console.log(err)
+    res.status(500).send({
+      error: {
+        message: 'Server error',
+      },
+    })
+  }
+}

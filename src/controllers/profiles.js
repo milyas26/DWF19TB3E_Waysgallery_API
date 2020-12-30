@@ -114,7 +114,7 @@ exports.getSingleUser = async (req, res) => {
     res.send({
       status: 'Success',
       message: 'Successfully get Profile',
-      data: user,
+      data: { user },
     })
   } catch (err) {
     console.log(err)
